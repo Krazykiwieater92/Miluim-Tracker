@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 
 const client = new MongoClient(
-  "mongodb+srv://eliezershai613:AmitBanim1@habittracker.exvbtfl.mongodb.net/"
+  process.env.MONGODB_URI || "mongodb://localhost:27017"
 );
 const db = client.db();
 
