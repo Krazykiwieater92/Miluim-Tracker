@@ -20,7 +20,13 @@ const ServiceDaySchema: Schema = new Schema({
     default: true,
     required: false,
   },
-
+  name: {
+    type: String,
+    default: "Unnamed Service",
+    minlength: 3,
+    maxlength: 50,
+    required: false,
+  },
   totalDays: {
     type: Number,
     required: false,

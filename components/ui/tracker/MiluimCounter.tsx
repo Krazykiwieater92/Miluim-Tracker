@@ -25,6 +25,7 @@ export default function MiluimCounter() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [clearInput, setClearInput] = useState(false);
 
   const calculateDays = (
     start: Date | undefined,
@@ -50,6 +51,7 @@ export default function MiluimCounter() {
     setStartDate(new Date());
     setEndDate(new Date());
     setOpen(false);
+    setClearInput(true);
   };
 
   //handle submission
@@ -59,10 +61,12 @@ export default function MiluimCounter() {
     try {
       await UploadToDb(new FormData(e.currentTarget));
       setSuccess("Data uploaded successfully.");
+      setClearInput(true);
     } catch (error) {
       setError("Error uploading data.");
     } finally {
       setLoading(false);
+      handleClear();
     }
   };
 
@@ -172,6 +176,17 @@ export default function MiluimCounter() {
               />
             </div>
 
+            <div className="flex flex-col tems-center justify-between p-4 rounded-lg border backdrop-blur">
+              <label className="mx-auto text-secondary ">
+                Enter Service Period Title
+              </label>
+              <input
+                className="rounded-lg border hover:bg-accent/30 backdrop-blur p-3 text-secondary w-[85%] mx-auto mt-3"
+                type="text"
+                name="name"
+                placeholder="Service Period Title"
+              ></input>
+            </div>
             {/* Summary */}
             {startDate && endDate && (
               <Card className="bg-muted/50">
