@@ -16,6 +16,12 @@ import { Badge } from "@/components/ui/badge";
 import { CalendarIcon, RotateCcwIcon, SendIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { set } from "mongoose";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../dropdown-menu";
 
 export default function MiluimCounter() {
   const [days, setDays] = useState(0);
@@ -26,6 +32,8 @@ export default function MiluimCounter() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [clearInput, setClearInput] = useState(false);
+  const [noName, setNoName] = useState(false);
+  const [selectedType, setSelectedType] = useState<string>("");
 
   const calculateDays = (
     start: Date | undefined,
@@ -176,16 +184,64 @@ export default function MiluimCounter() {
               />
             </div>
 
-            <div className="flex flex-col tems-center justify-between p-4 rounded-lg border backdrop-blur">
+            <div className="flex flex-col items-center justify-between p-4 rounded-lg border backdrop-blur">
               <label className="mx-auto text-secondary ">
                 Enter Service Period Title
               </label>
-              <input
-                className="rounded-lg border hover:bg-accent/30 backdrop-blur p-3 text-secondary w-[85%] mx-auto mt-3"
-                type="text"
-                name="name"
-                placeholder="Service Period Title"
-              ></input>
+              <div className="inline-flex gap-4">
+                <Label className="text-secondary mx-auto font-medium">
+                  Enter Custom name
+                </Label>
+
+                <Switch
+                  checked={noName}
+                  onCheckedChange={setNoName}
+                  aria-label="No Name"
+                />
+              </div>
+              {noName ? (
+                <input
+                  className="rounded-lg border hover:bg-accent/30 backdrop-blur p-3 text-background w-[85%] mx-auto mt-3"
+                  type="text"
+                  name="name"
+                  placeholder="Service Period Title"
+                  autoComplete="off"
+                />
+              ) : (
+                <>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button
+                        type="button"
+                        className=" text-background w-[50%] rounded-md mx-auto p-1 bg-accent/30 hover:bg-accent
+            transition duration-100 hover:border-accent hover:text-background mt-3"
+                      >
+                        {selectedType || "Choose type"}
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-70 bg-foreground/30 backdrop-blur text-background">
+                      <DropdownMenuItem
+                        onSelect={() => setSelectedType("Tzav 8")}
+                      >
+                        Tzav 8
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onSelect={() => setSelectedType("Tzav 9")}
+                      >
+                        Tzav 9
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onSelect={() => setSelectedType("Training")}
+                      >
+                        Training
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+
+                  {/* Hidden input to pass the selected value to the form */}
+                  <input type="hidden" name="name" value={selectedType} />
+                </>
+              )}
             </div>
             {/* Summary */}
             {startDate && endDate && (
