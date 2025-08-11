@@ -1,6 +1,8 @@
 "use server";
 
+import { auth } from "@/lib/auth/auth";
 import connectToDb from "@/lib/db";
+import { headers } from "next/headers";
 import mongoose from "mongoose";
 import ServiceDays from "../[models]/ServiceDays";
 import { revalidatePath } from "next/cache";
@@ -16,6 +18,15 @@ function calculateTotalDays(startDate: Date, endDate: Date): number {
 }
 export default async function UploadToDb(formData: FormData) {
   try {
+    // Get authenticated user
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+
+    if (!session?.user?.id) {
+      throw new Error("Authentication required");
+    }
+
     await connectToDb();
     console.log("Connected to database successfully.");
 
@@ -37,10 +48,10 @@ export default async function UploadToDb(formData: FormData) {
       throw new Error("Invalid date range. End date must be after start date.");
     }
     await ServiceDays.create({
-      userId: new mongoose.Types.ObjectId(),
+      userId: session.user.id, // Use actual user ID from session
       totalDays: calculatedDays,
       endDate: endDate,
-      startDate: new Date(realDate ),
+      startDate: new Date(realDate),
       name: formData.get("name") as string,
     });
     console.log(

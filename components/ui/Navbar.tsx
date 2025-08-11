@@ -1,5 +1,8 @@
 import { Separator } from "@/components/ui/separator";
 import { Link } from "lucide-react";
+import SignUpButton from "./account/SignUp";
+import LoginButton from "./account/LoginButton";
+import SignOutButton from "./account/SignOutButton";
 
 export default function Navbar() {
   return (
@@ -7,7 +10,7 @@ export default function Navbar() {
       {" "}
       <div className="flex items-center">
         <h1 className="text-4xl font-bold ml-10 mt-3 text-foreground">
-         <a href="/">Miluim Tracker</a>
+          <a href="/">Miluim Tracker</a>
         </h1>
         <div className="items-center flex ml-auto mr-auto gap-3">
           <a
@@ -24,6 +27,9 @@ export default function Navbar() {
           >
             News
           </a>
+          <LoginButton />
+          <SignUpButton />
+          <SignOutButton />
         </div>
       </div>
       <div>

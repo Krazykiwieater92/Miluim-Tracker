@@ -32,7 +32,7 @@ export function LoginForm({
       });
 
       if (data) {
-        router.push("/dashboard");
+        router.push("/");
         router.refresh();
       }
 

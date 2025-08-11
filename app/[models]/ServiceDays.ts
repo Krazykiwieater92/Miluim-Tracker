@@ -4,7 +4,7 @@ const ServiceDaySchema: Schema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
     ref: "User",
-    required: false,
+    required: true,
     index: true,
   },
   startDate: {

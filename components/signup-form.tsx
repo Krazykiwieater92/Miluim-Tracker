@@ -6,8 +6,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth/auth-client";
-import connectToDB from "@/lib/db";
-
+import { signUpWithEmailPassword } from "@/lib/auth/auth-client";
 export function SignUpForm({
   className,
   ...props
@@ -29,13 +28,11 @@ export function SignUpForm({
     try {
       // Sign up with Better Auth
 
-      const { data, error } = await authClient.signUp.email({
-        name: name, // required
-        email: email, // required
-        password: password, // required
-        image: "https://example.com/image.png", // optional
-        callbackURL: "http://localhost:3000/dashboard", // where to redirect after signup
-      });
+      const { data, error } = await signUpWithEmailPassword(
+        email,
+        password,
+        name
+      );
 
       if (data) {
         // Authentication successful - redirect to dashboard

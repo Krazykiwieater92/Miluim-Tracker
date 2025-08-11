@@ -6,7 +6,7 @@ export default function LoginButton() {
     <>
       <Link href="/login">
         {" "}
-        <Button type="button" variant="default" className="mt-5 mr-10">
+        <Button type="button" variant="default" className="mt-3 ml-auto">
           Login
         </Button>
       </Link>

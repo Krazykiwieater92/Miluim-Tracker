@@ -15,13 +15,13 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { CalendarIcon, RotateCcwIcon, SendIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import { set } from "mongoose";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../dropdown-menu";
+import Welcomer from "./welcomer";
 
 export default function MiluimCounter() {
   const [days, setDays] = useState(0);
@@ -80,6 +80,7 @@ export default function MiluimCounter() {
 
   return (
     <div className="container mx-auto max-w-4xl p-6 ">
+     
       <Card className="w-full bg-primary border-primary border">
         <CardHeader className="text-center">
           <CardTitle className="flex items-center justify-center gap-2 text-2xl text-secondary">

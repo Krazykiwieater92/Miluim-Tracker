@@ -6,7 +6,7 @@ export default async function SignUpButton() {
   return (
     <>
       <Link href="/signup">
-        <Button type="button" variant="secondary" className="mt-5 mr-10">
+        <Button type="button" variant="secondary" className="mt-3 ">
           Sign Up
         </Button>
       </Link>
