@@ -57,7 +57,7 @@ export function SignUpForm({
       // GitHub OAuth with Better Auth
       await authClient.signIn.social({
         provider: "github",
-        callbackURL: "/dashboard",
+        callbackURL: "/",
       });
     } catch (error: any) {
       console.error("GitHub login failed:", error);

@@ -30,7 +30,7 @@ export function LoginForm({
         email,
         password,
       });
-
+      
       if (data) {
         router.push("/");
         router.refresh();
@@ -72,6 +72,7 @@ export function LoginForm({
                   id="email"
                   name="email"
                   type="email"
+                  autoComplete="off"
                   placeholder="m@example.com"
                   required
                   disabled={isLoading}
