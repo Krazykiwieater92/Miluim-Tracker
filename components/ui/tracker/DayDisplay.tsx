@@ -49,6 +49,7 @@ export default async function DayDisplay() {
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 </form>
+                
                 <h3>Title: {record.name}</h3>
                 <p>Days: {record.totalDays}</p>
                 <p>From: {new Date(record.startDate).toLocaleDateString()}</p>
